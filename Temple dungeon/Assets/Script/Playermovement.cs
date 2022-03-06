@@ -5,12 +5,13 @@ using UnityEngine;
 public class Playermovement : MonoBehaviour
 {   public int speed;
     private Rigidbody2D rb;
-
+    private Animator anim;
     Vector2 move;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -18,6 +19,10 @@ public class Playermovement : MonoBehaviour
     {
         move.x = Input.GetAxisRaw("Horizontal");
         move.y = Input.GetAxisRaw("Vertical");
+        //For Animation
+        anim.SetFloat("Horizontal",move.x);
+        anim.SetFloat("Vertical",move.y);
+        anim.SetFloat("Speed",move.sqrMagnitude);
     }
     void FixedUpdate()
     {
